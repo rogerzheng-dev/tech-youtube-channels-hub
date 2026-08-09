@@ -21,3 +21,17 @@ Tech YouTube Channels Hub is a Django-based website for discovering, browsing, a
 - `channels` - channel models, views, forms, and CRUD features
 - `reviews` - review model and review creation
 - `accounts` - authentication routes
+
+## Screenshots
+
+### Home Page
+
+![Home Page](screenshots/home.png)
+
+### Channels Page
+
+![Channels Page](screenshots/channels.png)
+
+### Channel Detail Page
+
+![Channel Detail Page](screenshots/channel-detail.png)
