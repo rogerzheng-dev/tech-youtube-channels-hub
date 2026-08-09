@@ -35,3 +35,16 @@ Tech YouTube Channels Hub is a Django-based website for discovering, browsing, a
 ### Channel Detail Page
 
 ![Channel Detail Page](screenshots/channel-detail.png)
+
+
+## Run the Project
+
+After cloning the repository, run (note db.sqlite3 is empty):
+
+```bash
+cd tech-youtube-channels-hub/project02_root
+python -m venv .venv
+source .venv/Scripts/activate
+python -m pip install django pillow
+python manage.py migrate
+python manage.py runserver
