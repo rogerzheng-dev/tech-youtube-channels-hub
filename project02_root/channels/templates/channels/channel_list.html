@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Channels{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4">Tech YouTube Channels</h2>
+    <form method="get" class="mb-4">
+        <div class="row">
+            <div class="col-md-8">
+                <input type="text" name="q" class="form-control" placeholder="Search channels by name" value="{{ request.GET.q }}">
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        {% for channel in channels %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    {% if channel.image %}
+                        <img src="{{ channel.image.url }}" class="card-img-top" alt="{{ channel.name }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'channel_detail' channel.slug %}">{{ channel.name }}</a>
+                        </h5>
+                        <p class="card-text"><strong>Creator:</strong> {{ channel.creator_name }}</p>
+                        <p class="card-text"><strong>Category:</strong> {{ channel.get_category_display }}</p>
+                        <p class="card-text"><strong>Subscribers:</strong> {{ channel.subscribers }}</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No channels found.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

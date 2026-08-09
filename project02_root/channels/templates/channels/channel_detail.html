@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ channel.name }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ channel.name }}</h2>
+
+            {% if channel.image %}
+                <img src="{{ channel.image.url }}" alt="{{ channel.name }}" class="img-fluid mb-3" style="max-height: 300px; object-fit: cover;">
+            {% endif %}
+
+            <p><strong>Creator:</strong> {{ channel.creator_name }}</p>
+            <p><strong>Category:</strong> {{ channel.get_category_display }}</p>
+            <p><strong>Subscribers:</strong> {{ channel.subscribers }}</p>
+            <p><strong>Description:</strong> {{ channel.description }}</p>
+
+            <p>
+                <strong>YouTube URL:</strong>
+                <a href="{{ channel.youtube_url }}" target="_blank">{{ channel.youtube_url }}</a>
+            </p>
+
+            <a href="{% url 'channel_update' channel.slug %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'channel_delete' channel.slug %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'review_create' channel.slug %}" class="btn btn-primary">Add Review</a>
+
+            <hr>
+            <h3>Reviews</h3>
+
+            {% for review in channel.reviews.all %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p><strong>User:</strong> {{ review.user.username }}</p>
+                        <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+                        <p>{{ review.comment }}</p>
+                        <p><small>{{ review.created_at }}</small></p>
+
+                        {% if user == review.user %}
+                            <a href="{% url 'review_update' review.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{% url 'review_delete' review.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <p>No reviews yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

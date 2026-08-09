@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h2 class="mb-3">Contact Us</h2>
+
+            {% if submitted %}
+                <p class="text-success">Your message has been sent!</p>
+            {% else %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
